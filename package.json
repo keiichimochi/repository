@@ -4,24 +4,50 @@
   "description": "雑多なデータを快適に放り込むプライベートリポジトリナリ！",
   "main": "index.js",
   "scripts": {
+    "dev": "pnpm run dev:frontend",
     "dev:worker": "wrangler dev src/workers/index.ts",
     "deploy:worker": "wrangler deploy src/workers/index.ts",
-    "dev:frontend": "vite",
-    "build:frontend": "tsc && vite build",
+    "dev:frontend": "vite src/frontend",
+    "build:frontend": "tsc -p src/frontend/tsconfig.json && vite build src/frontend",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "test": "vitest"
+    "test": "vitest",
+    "migrate": "tsx scripts/migrate.ts"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@hono/zod-validator": "^0.4.2",
+    "@mantine/core": "^7.16.2",
+    "@mantine/form": "^7.16.2",
+    "@mantine/hooks": "^7.16.2",
+    "@tabler/icons-react": "^3.29.0",
+    "@tanstack/react-query": "^5.66.0",
+    "hono": "^4.6.20",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.5",
+    "ulid": "^2.3.0",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.3"
+  },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250129.0",
     "@types/node": "^22.13.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.19.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
     "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.3",
+    "vite": "^6.0.11",
     "wrangler": "^3.107.2"
   }
 }
