@@ -1,0 +1,26 @@
+name = "repository-api"
+main = "src/workers/index.ts"
+compatibility_date = "2024-03-20"
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "repository-db"
+database_id = "df8d2721-dcc8-4478-9d20-3fa34e351d82"
+
+# R2 Storage
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "repository-storage"
+
+[vars]
+NODE_ENV = "development"
+
+# Development
+[env.development]
+workers_dev = true
+
+# Production
+[env.production]
+workers_dev = false
+route = "api.your-domain.com/*" 

@@ -1,0 +1,27 @@
+{
+  "name": "repository",
+  "version": "1.0.0",
+  "description": "雑多なデータを快適に放り込むプライベートリポジトリナリ！",
+  "main": "index.js",
+  "scripts": {
+    "dev:worker": "wrangler dev src/workers/index.ts",
+    "deploy:worker": "wrangler deploy src/workers/index.ts",
+    "dev:frontend": "vite",
+    "build:frontend": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/parser": "^8.23.0",
+    "eslint": "^9.19.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "wrangler": "^3.107.2"
+  }
+}
