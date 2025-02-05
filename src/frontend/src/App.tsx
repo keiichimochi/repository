@@ -1,49 +1,22 @@
-import { AppShell, Burger, Group } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconDatabase, IconHome, IconSettings } from '@tabler/icons-react';
-import { MainNavbar } from './components/MainNavbar';
-import { MainHeader } from './components/MainHeader';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Routes, Route } from 'react-router-dom';
+import { ItemList } from './pages/ItemList';
+import { CreateItem } from './pages/CreateItem';
 
-const navItems = [
-  { icon: IconHome, label: 'ホーム', link: '/' },
-  { icon: IconDatabase, label: 'データ一覧', link: '/data' },
-  { icon: IconSettings, label: '設定', link: '/settings' },
-];
+const queryClient = new QueryClient();
 
 export default function App() {
-  const [opened, { toggle }] = useDisclosure();
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleNavClick = (link: string) => {
-    navigate(link);
-  };
-
   return (
-    <AppShell
-      header={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      padding="md"
-    >
-      <AppShell.Header>
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <MainHeader />
-        </Group>
-      </AppShell.Header>
-
-      <AppShell.Navbar p="md">
-        <MainNavbar 
-          items={navItems} 
-          activeLink={location.pathname}
-          onItemClick={handleNavClick}
-        />
-      </AppShell.Navbar>
-
-      <AppShell.Main>
-        <Outlet />
-      </AppShell.Main>
-    </AppShell>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider>
+        <Notifications />
+        <Routes>
+          <Route path="/" element={<ItemList />} />
+          <Route path="/create" element={<CreateItem />} />
+        </Routes>
+      </MantineProvider>
+    </QueryClientProvider>
   );
 }
